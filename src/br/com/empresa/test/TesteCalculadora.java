@@ -2,26 +2,42 @@ package br.com.empresa.test;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import br.com.empresa.lib.Calculadora;
 
 public class TesteCalculadora {
+	private Calculadora calculadora;
+	
+	@Before
+	public void before() {
+		calculadora = new Calculadora();
+		
+	}
 
 	@Test
 	public void somaNumerosInteiros() {
-		Calculadora calculadora = new Calculadora();
-		assertEquals(calculadora.Soma(2, 3), 5, 0);
+		calculadora.Somar(3);
+		assertEquals(calculadora.getResultado(), 3, 0);
+		calculadora.Somar(7);
+		assertEquals(calculadora.getResultado(), 10, 0);
+
+
 	}
 	
 	@Test
 	public void somaNumeroscomVírgula() {
-		Calculadora calculadora = new Calculadora();
-		assertEquals(calculadora.Soma(2.5, 3.5), 6, 0);
+		calculadora.Somar(2.33);
+		assertEquals(calculadora.getResultado(), 2.33, 0);
 	}
 	
-	
-	
+	@Test
+	public void criaCalculadoraComValorInicial() {
+		calculadora = new Calculadora(10);
+		calculadora.Somar(3);
+		assertEquals(calculadora.getResultado(), 13, 0);
+	}
 }
 
 
